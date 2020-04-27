@@ -2,8 +2,14 @@
 @us01 @md-contactos @fc-agregarcontacto @regression
 Feature: Agregar Contacto
 
-  Todos los usuarios pueden agregar contactos.
-  Los usuarios gratuitos ven publicidad y los usuarios suscritos no.
+  As a user
+  I want to add new contacts
+  So I can store their contact information.
+
+  All users, free and paid, can add contacts.
+  If new contact already exists, then user should be asked
+  to decide to rename or add it anyway with the same name
+  of existent contact.
 
   # Run before each escenario but after any before hook
   Background:
@@ -16,7 +22,7 @@ Feature: Agregar Contacto
     Then  el contacto es creado correctamente
 
 
-  @developing
+  @new
   Scenario: Agregar contacto existente
     Given un usuario se encuentra en contactos
     When  el usuario agrega un contacto que ya existe
