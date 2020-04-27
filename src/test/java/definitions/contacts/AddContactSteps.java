@@ -1,5 +1,6 @@
 package definitions.contacts;
 
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -14,6 +15,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.DriverFactory;
+
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -25,18 +29,19 @@ public class AddContactSteps {
     private AppiumDriver driver;
     private Wait wait;
 
+    @Before
+    public void setup() throws IOException {
+        abrirAppMobile();
+    }
+
+    private void abrirAppMobile() throws IOException {
+        System.out.println("Open app on mobile device");
+        driver = DriverFactory.createMobileDriver();
+        driver.launchApp();
+    }
+
     @Given("^un usuario se encuentra loggeado$")
-    public void unUsuarioSeEncuentraLoggeado() throws MalformedURLException {
-
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("automationName", "UiAutomator2");
-        caps.setCapability("platformName",   "android");
-        caps.setCapability("deviceName",     "S8");
-        caps.setCapability("appPackage",     "com.truecaller");
-        caps.setCapability("appActivity",    "com.truecaller.ui.TruecallerInit");
-        driver = new AppiumDriver(new URL("http://0.0.0.0:4723/wd/hub"), caps);
-
-        //driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    public void unUsuarioSeEncuentraLoggeado() {
         wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(By.id("com.truecaller:id/nextButton")));
         driver.findElementById("com.truecaller:id/nextButton").click();
