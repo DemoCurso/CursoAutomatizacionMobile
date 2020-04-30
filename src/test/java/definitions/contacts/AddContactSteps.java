@@ -15,6 +15,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageobjects.menu.MenuFooterPage;
 import utils.DriverFactory;
 
 import java.io.IOException;
@@ -28,10 +29,16 @@ public class AddContactSteps {
 
     private AppiumDriver driver;
     private Wait wait;
+    private MenuFooterPage menuFooterPage;
+
+    private void inicializarPages() {
+        menuFooterPage = new MenuFooterPage(driver);
+    }
 
     @Before
     public void setup() throws IOException {
         abrirAppMobile();
+        inicializarPages();
     }
 
     private void abrirAppMobile() throws IOException {
@@ -57,9 +64,7 @@ public class AddContactSteps {
 
     @Given("^un usuario se encuentra en contactos$")
     public void unUsuarioSeEncuentraEnContactos() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.widget.FrameLayout[@content-desc=\"Contactos\"]/android.view.ViewGroup")));
-        MobileElement el2 = (MobileElement) driver.findElementByXPath("//android.widget.FrameLayout[@content-desc=\"Contactos\"]/android.view.ViewGroup");
-        el2.click();
+        menuFooterPage.clickMenuContactos();
     }
 
     @When("^el usuario agrega un contacto$")
