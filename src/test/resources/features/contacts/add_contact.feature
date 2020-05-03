@@ -16,7 +16,7 @@ Feature: Agregar Contacto
     Then  el contacto es creado correctamente
 
 
-  @developing
+  @new
   Scenario: Agregar contacto existente
     Given un usuario se encuentra en contactos
     When  el usuario agrega un contacto que ya existe
