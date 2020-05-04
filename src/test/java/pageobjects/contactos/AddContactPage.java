@@ -35,36 +35,30 @@ public class AddContactPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-
     public void ingresarNombreContacto(String nombreContacto){
         System.out.println("Ingresa Nombre: " + nombreContacto);
         campoNombre.sendKeys(nombreContacto);
     }
-
 
     public void ingresarTelefonoContacto(String telefonoContacto){
         System.out.println("Ingresa Telefono: " + telefonoContacto);
         campoTelefono.sendKeys(telefonoContacto);
     }
 
-
     public void clickLabelNombre(){
         System.out.println("Click en label nombre");
         labelNombre.click();
     }
-
 
     public void clickLabelTelefono(){
         System.out.println("Click en label telefono");
         labelTelefono.click();
     }
 
-
     public void clickBotonGuardar(){
         System.out.println("Click en boton guardar");
         botonGuardar.click();
     }
-
 
     public boolean isDisplayedMensajeConfirmacion(){
         boolean result = false;
