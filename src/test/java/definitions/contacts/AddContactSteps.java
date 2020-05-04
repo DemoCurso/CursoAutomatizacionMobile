@@ -1,5 +1,6 @@
 package definitions.contacts;
 
+import com.cucumber.listener.Reporter;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,6 +13,7 @@ import pageobjects.contactos.SavedContactPage;
 import pageobjects.init.InitPage;
 import pageobjects.menu.MenuFooterPage;
 import utils.DriverFactory;
+import utils.ReporterUtil;
 
 import java.io.IOException;
 
@@ -44,7 +46,6 @@ public class AddContactSteps {
 
     @Given("^un usuario se encuentra loggeado$")
     public void unUsuarioSeEncuentraLoggeado() {
-
         initPage.clickNextButton();
         initPage.clickContinueButton();
         initPage.clickSkipButton();
@@ -63,17 +64,19 @@ public class AddContactSteps {
     public void elUsuarioAgregaUnContacto() {
 
         savedContactPage.clickBotonAgregarContacto();
-
         addContactPage.ingresarNombreContacto("AutomatizacionMobile");
         driver.navigate().back();
         addContactPage.clickLabelTelefono();
         addContactPage.ingresarTelefonoContacto("+56961499611");
+        driver.navigate().back();
+        ReporterUtil.addScreenshot(driver, "DatosParaCrearContacto");
         addContactPage.clickBotonGuardar();
     }
 
     @Then("^el contacto es creado correctamente$")
     public void elContactoEsCreadoCorrectamente() {
         boolean searchResult = savedContactPage.buscarContacto("AutomatizacionMobile");
+        ReporterUtil.addScreenshot(driver, "validacionContactoAgregado");
         Assert.assertTrue(searchResult);
         driver.closeApp();
     }
