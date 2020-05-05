@@ -3,11 +3,17 @@ package pageobjects.init;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.annotation.Nullable;
+import java.util.function.Predicate;
 
 public class InitPage {
 
@@ -29,7 +35,7 @@ public class InitPage {
     public InitPage(AppiumDriver driver){
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        wait = new WebDriverWait(this.driver, 30);
+        wait = new WebDriverWait(this.driver, 30).ignoring(StaleElementReferenceException.class);
     }
 
     public void clickNextButton(){

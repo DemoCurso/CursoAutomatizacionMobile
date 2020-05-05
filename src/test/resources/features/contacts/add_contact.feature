@@ -16,10 +16,14 @@ Feature: Agregar Contacto
     Given un usuario se encuentra loggeado
 
   @developing
-  Scenario: Agregar contacto exitosamente
+  Scenario Outline: Agregar contacto exitosamente
     Given un usuario se encuentra en contactos
-    When  el usuario agrega un contacto
+    When  el usuario agrega el contacto <nombre> con el telefono <telefono>
     Then  el contacto es creado correctamente
+    Examples:
+    |nombre             |telefono    |
+    |AA1                |+56961499611|
+    |AA2                |+56961499611|
 
 
   @new

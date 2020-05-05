@@ -24,6 +24,8 @@ public class AddContactSteps {
     private SavedContactPage savedContactPage;
     private AddContactPage addContactPage;
     private InitPage initPage;
+    private String nombre;
+    private String telefono;
 
     private void inicializarPages() {
         menuFooterPage = new MenuFooterPage(driver);
@@ -60,14 +62,17 @@ public class AddContactSteps {
         menuFooterPage.clickMenuContactos();
     }
 
-    @When("^el usuario agrega un contacto$")
-    public void elUsuarioAgregaUnContacto() {
+    @When("^el usuario agrega el contacto ([^\"]*) con el telefono ([^\"]*)$")
+    public void elUsuarioAgregaUnContacto(String nombre, String telefono) {
+
+        this.nombre = nombre;
+        this.telefono = telefono;
 
         savedContactPage.clickBotonAgregarContacto();
-        addContactPage.ingresarNombreContacto("AutomatizacionMobile");
+        addContactPage.ingresarNombreContacto(nombre);
         driver.navigate().back();
         addContactPage.clickLabelTelefono();
-        addContactPage.ingresarTelefonoContacto("+56961499611");
+        addContactPage.ingresarTelefonoContacto(telefono);
         driver.navigate().back();
         ReporterUtil.addScreenshot(driver, "DatosParaCrearContacto");
         addContactPage.clickBotonGuardar();
@@ -75,7 +80,7 @@ public class AddContactSteps {
 
     @Then("^el contacto es creado correctamente$")
     public void elContactoEsCreadoCorrectamente() {
-        boolean searchResult = savedContactPage.buscarContacto("AutomatizacionMobile");
+        boolean searchResult = savedContactPage.buscarContacto(nombre);
         ReporterUtil.addScreenshot(driver, "validacionContactoAgregado");
         Assert.assertTrue(searchResult);
         driver.closeApp();
