@@ -3,7 +3,6 @@
 Feature: Agregar Contacto
 
   Todos los usuarios pueden agregar contactos.
-  Los usuarios gratuitos ven publicidad y los usuarios suscritos no.
 
   # Run before each escenario but after any before hook
   Background:
@@ -16,7 +15,7 @@ Feature: Agregar Contacto
     Then  el contacto es creado correctamente
 
 
-  @developing
+  @new
   Scenario: Agregar contacto existente
     Given un usuario se encuentra en contactos
     When  el usuario agrega un contacto que ya existe
