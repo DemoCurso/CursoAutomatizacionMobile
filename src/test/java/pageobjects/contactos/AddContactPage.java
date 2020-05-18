@@ -1,13 +1,17 @@
 package pageobjects.contactos;
 
+import definitions.contactos.AddContactSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.support.PageFactory;
 
 public class AddContactPage {
 
+    private static final Logger logger = LogManager.getLogger(AddContactPage.class);
     private AppiumDriver driver;
 
     @AndroidFindBy(id = "com.samsung.android.contacts:id/nameEdit")
@@ -35,27 +39,27 @@ public class AddContactPage {
     }
 
     public void ingresarNombreContacto(String nombreContacto){
-        System.out.println("Ingresa Nombre: " + nombreContacto);
+        logger.debug("Ingresa Nombre: " + nombreContacto);
         campoNombre.sendKeys(nombreContacto);
     }
 
     public void ingresarTelefonoContacto(String telefonoContacto){
-        System.out.println("Ingresa Telefono: " + telefonoContacto);
+        logger.debug("Ingresa Telefono: " + telefonoContacto);
         campoTelefono.sendKeys(telefonoContacto);
     }
 
     public void clickLabelNombre(){
-        System.out.println("Click en label nombre");
+        logger.debug("Click en label nombre");
         labelNombre.click();
     }
 
     public void clickLabelTelefono(){
-        System.out.println("Click en label telefono");
+        logger.debug("Click en label telefono");
         labelTelefono.click();
     }
 
     public void clickBotonGuardar(){
-        System.out.println("Click en boton guardar");
+        logger.debug("Click en boton guardar");
         botonGuardar.click();
     }
 }

@@ -4,10 +4,13 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.support.PageFactory;
 
 public class MenuFooterPage {
 
+    private static final Logger logger = LogManager.getLogger(MenuFooterPage.class);
     private AppiumDriver driver;
 
     @AndroidFindBy(xpath = "//android.widget.FrameLayout[@content-desc=\"Contactos\"]/android.view.ViewGroup")
@@ -19,7 +22,7 @@ public class MenuFooterPage {
     }
 
     public void clickMenuContactos(){
-        System.out.println("Click en menu contactos");
+        logger.debug("Click en menu contactos");
         menuContactos.click();
     }
 

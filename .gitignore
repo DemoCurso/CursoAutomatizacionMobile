@@ -1,3 +1,5 @@
+*.html
+*.jpg
 *.iml
 *.apk
 .DS_Store

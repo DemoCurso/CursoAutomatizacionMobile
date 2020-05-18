@@ -8,6 +8,8 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class SavedContactPage {
 
+    private static final Logger logger = LogManager.getLogger(SavedContactPage.class);
     private AppiumDriver driver;
     private Wait wait;
 
@@ -40,14 +43,14 @@ public class SavedContactPage {
 
     public boolean buscarContacto(String nombreContacto){
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//android.widget.TextView[@resource-id='com.truecaller:id/title']")));
-        while(getContact("AutomatizacionMobile").size() == 0) {
+        while(getContact(nombreContacto).size() == 0) {
             scrollDown();
         }
-        if(getContact("AutomatizacionMobile").size() > 0){
-            System.out.println("Contacto encontrado: ["+ getContact("AutomatizacionMobile").get(0).getText() +"]");
-            Assert.assertEquals("AutomatizacionMobile", getContact("AutomatizacionMobile").get(0).getText());
+        if(getContact(nombreContacto).size() > 0){
+            logger.debug("Contacto encontrado: ["+ getContact(nombreContacto).get(0).getText() +"]");
+            Assert.assertEquals(nombreContacto, getContact(nombreContacto).get(0).getText());
         }else
-            System.out.println("No se encontro el contacto que debio haber sido creado.");
+            logger.debug("No se encontro el contacto que debio haber sido creado.");
         return true;
     }
 
@@ -56,7 +59,7 @@ public class SavedContactPage {
     }
 
     private void scrollDown(){
-        System.out.println("Scroll Down");
+        logger.debug("Scroll Down");
         Dimension dimension = driver.manage().window().getSize();
         Double scrollHeightStart = dimension.getHeight() * 0.5;
         int scrollStart = scrollHeightStart.intValue();
