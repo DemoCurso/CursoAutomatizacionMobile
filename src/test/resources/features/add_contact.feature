@@ -12,7 +12,7 @@ Feature: Agregar Contacto
   Scenario: Agregar contacto exitosamente
     Given un usuario se encuentra en contactos
     When  el usuario agrega un contacto
-    Then  el contacto es creado correctamente
+    Then  el contacto se visualiza en la lista de contactos
 
 
   @new
