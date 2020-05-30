@@ -65,7 +65,7 @@ public class AddContactSteps {
         menuFooterPage.clickMenuContactos();
     }
 
-    @When("^el usuario agrega el contacto ([^\\\"]*) con el telefono ([^\\\"]*)$")
+    @When("^el usuario agrega un contacto$")
     public void el_usuario_agrega_un_contacto(String nombre, String telefono){
 
         this.nombre   = nombre;
@@ -81,7 +81,7 @@ public class AddContactSteps {
         addContactPage.clickBotonGuardar();
     }
 
-    @Then("^el contacto es creado correctamente$")
+    @Then("^el contacto aparece en la lista de contactos guardados$")
     public void elContactoEsCreadoCorrectamente() {
         boolean searchResult = savedContactPage.buscarContacto(nombre);
         ReporterUtil.addScreenshot(driver, "ValidacionContactoAgregado");

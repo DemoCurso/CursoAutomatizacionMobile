@@ -1,4 +1,3 @@
-
 @us01 @md-contactos @fc-agregarcontacto @regression
 Feature: Agregar Contacto
 
@@ -10,36 +9,30 @@ Feature: Agregar Contacto
     Given un usuario se encuentra loggeado
 
   @developing
-  Scenario Outline: Agregar contacto exitosamente
+  Scenario: Agregar contacto exitosamente
     Given un usuario se encuentra en contactos
-    When  el usuario agrega el contacto <nombre> con el telefono <telefono>
-    Then  el contacto es creado correctamente
-    Examples:
-    |nombre |telefono    |
-    |Aaron  |+56963772289|
-    |Bastian|+56927839841|
+    When  el usuario agrega un contacto
+    Then  el contacto aparece en la lista de contactos guardados
 
   @new
   Scenario: Agregar contacto existente
     Given un usuario se encuentra en contactos
     When  el usuario agrega un contacto que ya existe
-    Then  se solicita confirmación al usuario
-
+    Then  aparece un mensaje que solicita confirmación del usuario
 
   @new
   Scenario: Confirmar agregar contacto existente
     Given un usuario se encuentra en contactos
     When  el usuario agrega un contacto que ya existe
-    And   confirma agregarlo de todas formas
-    Then  se crea el contacto con el mismo nombre que el existente
-
+    And   el usuario confirma agregarlo de todas formas
+    Then  el contacto aparece en la lista de contactos guardados
 
   @new
   Scenario: Renombrar agregar contacto existente
     Given un usuario se encuentra en contactos
     When  el usuario agrega un contacto que ya existe
-    And   decide renombrar el contacto
-    Then  el contacto no es creado
+    And   el usuario decide renombrar el contacto
+    Then  el usuario vuelve a la pantalla de agregar contacto
 
 
 
