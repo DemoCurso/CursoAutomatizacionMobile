@@ -1,6 +1,8 @@
 package utils;
 
 import io.appium.java_client.AppiumDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -12,9 +14,11 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+
 public class DriverFactory {
 
     private static AppiumDriver driverMobile;
+    private static final Logger logger = LogManager.getLogger(DriverFactory.class);
 
     private static DesiredCapabilities readCapabilitiesFromProperties(Properties properties){
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -25,7 +29,7 @@ public class DriverFactory {
 
     private static AppiumDriver initializeMobileDriver(String urlAppium, Properties properties) throws MalformedURLException {
         DesiredCapabilities capsMobile = readCapabilitiesFromProperties(properties);
-        System.out.println("Inicializa el appium driver apuntando a la URL de appium: ["+ urlAppium +"]");
+        logger.debug("Inicializa el appium driver apuntando a la URL de appium: ["+ urlAppium +"]");
         driverMobile = new AppiumDriver(new URL(urlAppium), capsMobile);
         //driverMobile.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         return driverMobile;
@@ -59,7 +63,7 @@ public class DriverFactory {
     }
 
     private static Properties readPropertiesFromFile(String propertiesFileName) throws IOException {
-        System.out.println("Read Capabilities From Properties File: " + propertiesFileName + ".properties");
+        logger.debug("Read Capabilities From Properties File: " + propertiesFileName + ".properties");
         File propFileName = new File("src/test/resources/properties/"+ propertiesFileName +".properties").getAbsoluteFile();
         FileInputStream inputStream = new FileInputStream(propFileName);
         Properties properties = new Properties();
